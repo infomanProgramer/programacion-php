@@ -139,3 +139,98 @@ class MyClass
     private $private = 'Private';
 }
 ```
+
+Dentro de los métodos de la clase se puede acceder a las propiedades no estaticas utilizando -> (el operador del objeto) **$this->$propiedad**. A las propiedades estaticas se puede acceder utilizando **::** **self::$propiedad**
+
+> Nota
+>
+> > Palabra reservada static
+> > Declarar atributos o métodos como **estáticos** los hacen accesibles sin necesidad de instanciar la clase
+
+#### Declaraciones de propiedades tipadas
+
+A partir de php 7.4.0 la definción de propiedades pueden incluirse
+
+```php
+class Usuario{
+    public string $nombre;
+    public int $edad;
+
+    public function __construct(string $nombre, int $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+}
+
+$user = new Usuario("Carlos Cuellar", 22);
+
+var_dump($user->nombre);
+echo "<br>";
+var_dump($user->edad);
+echo "<br>";
+```
+
+el resultado será:
+
+![alt text](image-1.png)
+
+#### Acceso a las propiedades
+
+```php
+class Usuario{
+    private string $nombre;
+    private int $edad;
+
+    public function __construct(string $nombre, int $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+
+    public function setNombre(string $nombre): void {
+        $this->nombre = $nombre;
+    }
+    public function setEdad(int $edad): void {
+        $this->edad = $edad;
+    }
+    public function getNombre(): string {
+        return $this->nombre;
+    }
+    public function getEdad(): int {
+        return $this->edad;
+    }
+}
+
+$user = new Usuario("Carlos Cuellar", 22);
+
+var_dump($user->getNombre());
+echo "<br>";
+var_dump($user->getEdad());
+echo "<br>";
+
+$user->setNombre("Juan Pablo");
+$user->setEdad(66);
+
+var_dump($user->getNombre());
+echo "<br>";
+var_dump($user->getEdad());
+echo "<br>";
+```
+
+#### Propiedad Readonly
+
+A partir de PHP 8.1.0, una propiedad se puede declarar con el modificador readonly (de solo lectura), lo que impide la modificación de la propiedad después de la inicialización.
+
+```php
+class Test {
+   public readonly string $prop;
+
+   public function __construct(string $prop) {
+       // Inicialización.
+       $this->prop = $prop;
+   }
+}
+```
+
+#### Herencia de Objetos
+
+https://www.php.net/manual/es/language.oop5.inheritance.php
