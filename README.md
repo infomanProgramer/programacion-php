@@ -233,4 +233,57 @@ class Test {
 
 #### Herencia de Objetos
 
+Es un principio de programación, que nos dice que una clase puede heredar caracteristicas y propiedades de otra clase, esto nos permite implementar funcionalidad adicional a objetos similiare sin reimplementar toda la funcionalidad compartida.
+
+Por ejemplo:
+
+```php
+<?php
+
+class Persona{
+    private int $id;
+    private string $nombre;
+    public function __construct(int $id, string $nombre) {
+        $this->id = $id;
+        $this->nombre = $nombre;
+    }
+
+    public function showMessage1(){
+        echo "method (showMessage1) Mensaje lanzado desde Persona <br>";
+    }
+
+    public function showMessage2(){
+        echo "method (showMessage) Mensaje lanzado desde Persona <br>";
+    }
+}
+
+class Estudiante extends Persona{
+    private string $carrera;
+    private int $semestre;
+    public function __construct(int $id, string $nombre, string $carrera, int $semestre) {
+        parent::__construct($id, $nombre);
+        $this->carrera = $carrera;
+        $this->semestre = $semestre;
+    }
+    public function showMessage2(){
+        echo "method (showMessage2) Mensaje lanzado desde Estudiante <br>";
+    }
+}
+
+
+var_dump("Herencias en PHP <br>");
+
+$estudiante = new Estudiante(1, "Rafael", "Informatica", 4);
+
+$estudiante->showMessage1();
+
+$estudiante->showMessage2();
+```
+
+#### Compatibilidad del tipo de retorno de clases internas
+
+Antes de php 8., muchas de las clases internas o métodos no se declaraba el tipo de retorno, y ningun tipo de retorno era permitido cuando se heredaba de ellas.
+
+Como PHP 8.1.0, muchos de los métodos internos empezarón a declarar tentativamente su tipo de retorno, en ese caso el valor retornado de los metodos deberia ser compatible con
+
 https://www.php.net/manual/es/language.oop5.inheritance.php
